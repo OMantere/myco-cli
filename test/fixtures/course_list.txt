@@ -1,0 +1,28 @@
+CS-C3130 - Information Security, 13.09.2016-27.10.2016
+CS-C3140 - Operating Systems, 13.09.2016-17.10.2016
+CS-E3210 - Machine Learning: Basic Principles, 13.09.2016-21.10.2016
+CS-E4590 - Competitive Programming, 17.09.2016-10.12.2016
+CS-E4810 - Machine Learning and Neural Networks, 31.10.2016-09.12.2016
+ELEC-A7100 - C-ohjelmoinnin peruskurssi - kesäkurssi 2016, 20.06.2016-31.08.2016
+ENG-A1005 - Insinööritieteiden tulevaisuusfoorumi, 31.10.2016-15.12.2016
+ICS-A1120 - Ohjelmointi 2, 22.02.2016-20.05.2016
+MS-A0008 - Matriisilaskenta, 22.02.2016-07.04.2016
+MS-A0107 - Differentiaali- ja integraalilaskenta 1 (CHEM), 04.01.2016-18.02.2016
+MS-A0202 - Differentiaali- ja integraalilaskenta 2 (SCI), 16.05.2016-15.06.2016
+MS-A0305 - Differentiaali- ja integraalilaskenta 3, 12.09.2016-27.10.2016
+MS-A0503 - Todennäköisyyslaskennan ja tilastotieteen peruskurssi, 04.01.2016-17.02.2016
+MS-C1080 - Algebran perusrakenteet, 03.01.2017-09.02.2017
+MS-C1340 - Lineaarialgebra ja differentiaaliyhtälöt, 31.10.2016-15.12.2016
+MS-C1540 - Euklidiset avaruudet, 02.01.2017-13.02.2017
+MS-C2128 - Ennustaminen ja aikasarja-analyysi, 31.10.2016-08.12.2016
+PHYS-A0110 - Yliopistofysiikan perusteet (TFM), 12.09.2016-21.10.2016
+PHYS-A0120 - Termodynamiikka (TFM), 31.10.2016-09.12.2016
+PHYS-A0130 - Electromagnetism (TFM), 04.01.2016-12.02.2016
+PHYS-A0140 - Structure of Matter (TFM), 22.02.2016-22.04.2016
+PHYS-CV - Course with Varying Content/Masterclass in Physics, 09.05.2016-20.05.2016
+Ruotsin lähtötasotesti - BIZ
+SCI-A0000 - Johdatus opiskeluun 2015-2016, 08.09.2015-09.12.2015
+Tiedonhaun oppimistehtävät 2015-2016
+TU-A1100 - Tuotantotalous 1, 12.01.2016-01.04.2016
+TU-A1150 - Filosofia ja systeemiajattelu, 18.01.2017-31.03.2017
+TU-E4030 - Entrepreneurial Finance, 22.02.2016-01.04.2016
