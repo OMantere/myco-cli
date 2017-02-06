@@ -1,5 +1,11 @@
 #!/bin/bash -e
 
+# setup virtualenv
+pip install virtualenv
+virtualenv venv -p python2.7
+source venv/bin/activate
+pip install --upgrade -r requirements.txt
+
 # Mac code signing shitty hack
 if [[ $(uname) == "Darwin" ]]; then
     codesign -f -s - ./venv/bin/python
