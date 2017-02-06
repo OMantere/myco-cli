@@ -2,3 +2,7 @@
 venv
 *.pyc
 **/*.pyc
+*.swo
+*.swp
+.cache
+act
