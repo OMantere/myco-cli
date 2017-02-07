@@ -18,7 +18,7 @@ class SAMLLogin:
 		return self.http.post(self.sso_url, body, headers)
 
 	def mycourses_post(self, sso_response):
-		bs = BeautifulSoup(sso_response.content, 'html.parser')
+		bs = BeautifulSoup(sso_response.text, 'html.parser')
 		if 'The password you entered was incorrect.' in bs.text:
 			raise IncorrectLoginException
 		saml_response = bs.find('input', {'name': 'SAMLResponse'}).get('value')

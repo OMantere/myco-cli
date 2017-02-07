@@ -3,7 +3,6 @@
 import logging
 from lib.credentials import get_credentials, erase_credentials
 from lib.args import args
-from lib.core import get_course_list
 from lib.session import Session
 
 
