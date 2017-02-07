@@ -4,13 +4,13 @@ import json
 from lib.session import Session
 from lib.credentials import get_credentials
 from test.test_helpers import write_fixture
-from lib.html import get_course_list
+from lib.html import parse_course_list
 
 
 def generate_html_fixtures():
 	landing_page_html = session.landing_page_response.text
 	write_fixture('landing_page.html', landing_page_html)
-	write_fixture('course_list.json', json.dumps(get_course_list(landing_page_html), ensure_ascii=False))
+	write_fixture('course_list.json', json.dumps(parse_course_list(landing_page_html), ensure_ascii=False))
 
 
 if __name__ == '__main__':

@@ -6,5 +6,5 @@ landing_page_html = read_fixture('landing_page.html')
 course_list = json.loads(read_fixture('course_list.json'))
 
 
-def test_get_course_list():
-	assert course_list == get_course_list(landing_page_html)
+def test_parse_course_list():
+	assert course_list == parse_course_list(landing_page_html)
