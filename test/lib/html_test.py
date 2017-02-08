@@ -23,5 +23,5 @@ def test_scrape_page_files():
 	assert section_files == html.scrape_page_files(section_page, mock_session)
 
 
-def test_parse_mc_list_item():
+def test_parse_mc_list_item_returns_none():
 	assert html.parse_mc_list_item(BeautifulSoup('nonsense')) is None

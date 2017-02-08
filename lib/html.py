@@ -44,14 +44,14 @@ def scrape_page_files(soup, session):
 	assignments = soup.find_all("li", {"class": "activity assign modtype_assign "})
 	yui_files = soup.find_all("div", {"id": re.compile("^assign_files")})
 
-	files = map(parse_mc_list_item, folders + resources + yui_files)
+	files = filter(None, map(parse_mc_list_item, resources + yui_files))
 	for f in files:
 		f['path'] = []
 
-	for assignment in filter(None, map(parse_mc_list_item, assignments)):
-		assignment_files = scrape_page_files(session.http.get(assignment['url']).text, session)
-		for f in assignment_files:
-			f['path'].insert(0, assignment['name'])
-		files += assignment_files
+	for nested in filter(None, map(parse_mc_list_item, folders + assignments)):
+		nested_files = scrape_page_files(session.http.get(nested['url']).text, session)
+		for f in nested_files:
+			f['path'].insert(0, nested['name'])
+		files += nested_files
 
-	return filter(None, files)
+	return files
