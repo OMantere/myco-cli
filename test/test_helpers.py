@@ -3,6 +3,7 @@ import const
 import json
 
 fixture_dir = os.path.join(const.project_root, 'test/fixtures/')
+mock_session = type('Session', (), {})
 
 
 def read_fixture(filename):

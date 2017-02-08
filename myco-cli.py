@@ -1,9 +1,11 @@
 #!venv/bin/python
 
 import logging
-from lib.credentials import get_credentials, erase_credentials
+from lib.credentials import get_credentials, erase_credentials, store_credentials
 from lib.args import args
 from lib.session import Session
+from lib import file
+from lib import actions
 
 
 def init_logging():
@@ -13,14 +15,31 @@ def init_logging():
 		logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.WARN)
 
 
-def handle_credentials():
+def retrieve_credentials():
 	if args.erase_login and not erase_credentials():
-		print('\nFailed to erase login.')
-	return get_credentials(args.save_login)
+		print('Failed to erase login.')
+	return get_credentials()
+
+
+def save_credentials(user, password):
+	if args.save_login:
+		if store_credentials(user, password):
+			print('Login saved in keyring.')
+		else:
+			print('Failed to save login!')
 
 
 if __name__ == '__main__':
 	print('\nWelcome to the MyCourses command line client!')
 	init_logging()
-	user, password = handle_credentials()
+	user, password = retrieve_credentials()
 	session = Session(user, password)
+	save_credentials(user, password)
+
+	# download yo
+	if args.action == 'download':
+		course_list = actions.get_course_list(session)
+		for course in course_list:
+			print('\nDownloading files for course ' + course['name'])
+			files = actions.get_course_files(session, course)
+			file.download_files(files, session)

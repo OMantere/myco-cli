@@ -44,15 +44,10 @@ def ask_credentials():
 	return user, password
 
 
-def get_credentials(save_login):
+def get_credentials():
 	credentials = read_credentials()
 	if credentials is None:
 		credentials = ask_credentials()
 	else:
-		print('\nLogin information loaded from keyring.')
-	if save_login:
-		if store_credentials(credentials[0], credentials[1]):
-			print('\nLogin saved in keyring.')
-		else:
-			print('\nFailed to save login!')
+		print('Login information loaded from keyring.')
 	return credentials

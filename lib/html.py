@@ -1,21 +1,22 @@
-from bs4 import BeautifulSoup
+import re
 import const
+from bs4 import BeautifulSoup
 
 
 def bs_decorator(func):
 	"""Decorator to turn the html passed to the parser function to a Beautifulsoup object"""
-	def wrapper(html):
-		return func(BeautifulSoup(html, 'html.parser'))
+	def wrapper(html, *args):
+		return func(BeautifulSoup(html, 'html.parser'), *args)
 	return wrapper
 
 
-def parse_mc_list_item(li):
-	link = li.find('a')
+def parse_mc_list_item(item):
+	link = item.find('a')
 	return {'name': link.text, 'url': link['href']}
 
 
-def parse_mc_link_list(ul):
-	return map(parse_mc_list_item, ul.find_all('li'))
+def parse_mc_link_list(link_list):
+	return map(parse_mc_list_item, link_list.find_all('li'))
 
 
 @bs_decorator
@@ -31,10 +32,20 @@ def parse_course_sections(soup):
 
 
 @bs_decorator
-def scrape_page_files(soup):
-	folders = (soup.find_all("li", {"class": "activity folder modtype_folder"}))
-	resources = (soup.find_all("li", {"class": "activity resource modtype_resource"}))
-	files = map(parse_mc_list_item, folders + resources)
+def scrape_page_files(soup, session):
+	folders = soup.find_all("li", {"class": "activity folder modtype_folder "})
+	resources = soup.find_all("li", {"class": "activity resource modtype_resource "})
+	assignments = soup.find_all("li", {"class": "activity assign modtype_assign "})
+	yui_files = soup.find_all("div", {"id": re.compile("^assign_files")})
+
+	files = map(parse_mc_list_item, folders + resources + yui_files)
 	for f in files:
 		f['path'] = []
+
+	for assignment in map(parse_mc_list_item, assignments):
+		assignment_files = scrape_page_files(session.http.get(assignment['url']).text, session)
+		for f in assignment_files:
+			f['path'].insert(0, assignment['name'])
+		files += assignment_files
+
 	return files

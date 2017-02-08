@@ -9,9 +9,10 @@ class Session:
 		try:
 			self.saml.login(user, password)
 		except IncorrectLoginException:
-			print('\nIncorrect username or password.')
+			print('Incorrect username or password.')
+			exit()
 		except:
-			print('\nUnknown login error.')
+			print('Unknown login error.')
 			exit()
 		self.landing_page_response = self.http.history[-1]
-		print('\nLogin successful!')
+		print('Login successful!')
