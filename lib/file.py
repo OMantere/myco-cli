@@ -1,6 +1,7 @@
+import json
 import os
 import urllib
-import json
+
 from const import files_root
 
 inventory_path = os.path.join(files_root, 'inventory.json')

@@ -1,5 +1,5 @@
-import re
 import os
+import re
 
 project_root = os.path.dirname(os.path.abspath(__file__))
 files_root = os.path.join(project_root, 'files')

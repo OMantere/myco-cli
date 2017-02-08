@@ -1,9 +1,9 @@
 #!venv/bin/python
 
-from lib.session import Session
-from lib.credentials import get_credentials
-from test.test_helpers import write_json_fixture, write_html_fixture
 from lib import html
+from lib.credentials import get_credentials
+from lib.session import Session
+from test.test_helpers import write_json_fixture, write_html_fixture
 
 
 def generate_html_fixtures():

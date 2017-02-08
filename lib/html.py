@@ -1,12 +1,16 @@
 import re
-import const
+
 from bs4 import BeautifulSoup
+
+import const
 
 
 def bs_decorator(func):
 	"""Decorator to turn the html passed to the parser function to a Beautifulsoup object"""
+
 	def wrapper(html, *args):
 		return func(BeautifulSoup(html, 'html.parser'), *args)
+
 	return wrapper
 
 

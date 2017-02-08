@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 
-
 mycourses_saml_url = 'https://mycourses.aalto.fi/Shibboleth.sso/SAML2/POST'
 
 

@@ -1,11 +1,12 @@
 #!venv/bin/python
 
 import logging
-from lib.credentials import get_credentials, erase_credentials, store_credentials
-from lib.args import args
-from lib.session import Session
-from lib import file
+
 from lib import actions
+from lib import file
+from lib.args import args
+from lib.credentials import get_credentials, erase_credentials, store_credentials
+from lib.session import Session
 
 
 def init_logging():

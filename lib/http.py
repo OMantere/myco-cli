@@ -1,5 +1,6 @@
-import requests
 import logging
+
+import requests
 from requests.packages.urllib3.exceptions import SubjectAltNameWarning
 
 requests.packages.urllib3.disable_warnings(SubjectAltNameWarning)
