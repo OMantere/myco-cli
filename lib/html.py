@@ -16,11 +16,13 @@ def bs_decorator(func):
 
 def parse_mc_list_item(item):
 	link = item.find('a')
+	if link is None:
+		return None
 	return {'name': link.text, 'url': link['href']}
 
 
 def parse_mc_link_list(link_list):
-	return map(parse_mc_list_item, link_list.find_all('li'))
+	return filter(None, map(parse_mc_list_item, link_list.find_all('li')))
 
 
 @bs_decorator
@@ -46,10 +48,10 @@ def scrape_page_files(soup, session):
 	for f in files:
 		f['path'] = []
 
-	for assignment in map(parse_mc_list_item, assignments):
+	for assignment in filter(None, map(parse_mc_list_item, assignments)):
 		assignment_files = scrape_page_files(session.http.get(assignment['url']).text, session)
 		for f in assignment_files:
 			f['path'].insert(0, assignment['name'])
 		files += assignment_files
 
-	return files
+	return filter(None, files)

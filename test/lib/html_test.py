@@ -1,5 +1,7 @@
-from test.test_helpers import read_fixture, read_json_fixture, mock_session
+from bs4 import BeautifulSoup
+
 from lib import html
+from test.test_helpers import read_fixture, read_json_fixture, mock_session
 
 landing_page = read_fixture('landing_page.html')
 course_list = read_json_fixture('course_list')
@@ -19,3 +21,7 @@ def test_parse_course_sections():
 
 def test_scrape_page_files():
 	assert section_files == html.scrape_page_files(section_page, mock_session)
+
+
+def test_parse_mc_list_item():
+	assert html.parse_mc_list_item(BeautifulSoup('nonsense')) is None
