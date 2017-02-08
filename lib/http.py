@@ -12,10 +12,10 @@ class HTTP:
 		self.cache = {}
 
 	def add_to_history(self, response):
-		if len(response.history) > 0:
-			self.add_to_history(response.history[-1])
+		self.history.extend(response.history)
 		self.history.append(response)
-		self.cache[response.url] = response
+		for r in response.history + [response]:
+			self.cache[r.url] = r
 
 	def get(self, url, refresh=False):
 		logging.info('GET ' + url)

@@ -2,19 +2,29 @@ from bs4 import BeautifulSoup
 import const
 
 
-def make_soup(html):
-	return BeautifulSoup(html, 'html.parser')
+def bs_decorator(func):
+	"""Decorator to turn the html passed to the parser function to a Beautifulsoup object"""
+	def wrapper(html):
+		return func(BeautifulSoup(html, 'html.parser'))
+	return wrapper
 
 
-def parse_course_list(landing_page_html):
-	bs = make_soup(landing_page_html)
-	course_list_a = bs.find('a', title=const.my_own_courses)
-	courses = []
-	for li in course_list_a.parent.find('ul').children:
-		course_a = li.find('a')
-		courses.append({
-			'name': course_a.text,
-			'href': course_a['href']
-		})
-		print(courses[-1])
-	return courses
+def parse_mc_link_list(ul):
+	def parse_list_item(li):
+		link = li.find('a')
+		return {'name': link.text, 'url': link['href']}
+	return map(parse_list_item, ul.find_all('li'))
+
+
+@bs_decorator
+def parse_course_list(soup):
+	course_list = soup.find('a', title=const.my_own_courses).parent.find('ul')
+	return parse_mc_link_list(course_list)
+
+
+@bs_decorator
+def parse_course_sections(soup):
+	section_menu = soup.find('ul', {'id': 'menu'})
+	return parse_mc_link_list(section_menu)
+
+

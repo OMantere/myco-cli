@@ -18,11 +18,11 @@ class SAMLLogin:
 		return self.http.post(self.sso_url, body, headers)
 
 	def mycourses_post(self, sso_response):
-		bs = BeautifulSoup(sso_response.text, 'html.parser')
-		if 'The password you entered was incorrect.' in bs.text:
+		soup = BeautifulSoup(sso_response.text, 'html.parser')
+		if 'The password you entered was incorrect.' in soup.text:
 			raise IncorrectLoginException
-		saml_response = bs.find('input', {'name': 'SAMLResponse'}).get('value')
-		relay_state = bs.find('input', {'name': 'RelayState'}).get('value')
+		saml_response = soup.find('input', {'name': 'SAMLResponse'}).get('value')
+		relay_state = soup.find('input', {'name': 'RelayState'}).get('value')
 		body = {'RelayState': relay_state, 'SAMLResponse': saml_response}
 		headers = {'Referer': self.sso_url, 'Origin': 'https://idp.aalto.fi', 'Host': 'mycourses.aalto.fi'}
 		return self.http.post(mycourses_saml_url, body, headers)
