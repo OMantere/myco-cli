@@ -9,11 +9,13 @@ def bs_decorator(func):
 	return wrapper
 
 
+def parse_mc_list_item(li):
+	link = li.find('a')
+	return {'name': link.text, 'url': link['href']}
+
+
 def parse_mc_link_list(ul):
-	def parse_list_item(li):
-		link = li.find('a')
-		return {'name': link.text, 'url': link['href']}
-	return map(parse_list_item, ul.find_all('li'))
+	return map(parse_mc_list_item, ul.find_all('li'))
 
 
 @bs_decorator
@@ -28,3 +30,11 @@ def parse_course_sections(soup):
 	return parse_mc_link_list(section_menu)
 
 
+@bs_decorator
+def scrape_page_files(soup):
+	folders = (soup.find_all("li", {"class": "activity folder modtype_folder"}))
+	resources = (soup.find_all("li", {"class": "activity resource modtype_resource"}))
+	files = map(parse_mc_list_item, folders + resources)
+	for f in files:
+		f['path'] = []
+	return files

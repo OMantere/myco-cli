@@ -7,5 +7,16 @@ def get_course_list(session):
 
 def get_course_files(session, course):
 	url = course['href']
-	course_page_html = session.http.get(url).text
-	course_sections = html.parse_course_sections(course_page_html)
+	course_sections = html.parse_course_sections(session.http.get(url))
+	files = []
+	for section in course_sections:
+		section_files = html.scrape_page_files(section.http.get(section.url).text)
+		for f in section_files:
+			f['path'].insert(0, section.name)
+		files.extend(section_files)
+	for f in files:
+		f['path'].insert(0, course.name)
+	return files
+
+
+
